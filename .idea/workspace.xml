@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c698e825-b977-4b02-9d34-4c97628078cc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/build-enviroment/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build-enviroment/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/wordcount/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/code/wordcount/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/wordcount/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/wordcount/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/wordcount/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/wordcount/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/wordcount/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/wordcount/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/wordcount/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/wordcount/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/wordcount/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/wordcount/.idea/vcs.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="29opqwy5OoNpsOps2WEAimAd1qJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/media/hainv/New Volume2/apachestorm/code/wordcount"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c698e825-b977-4b02-9d34-4c97628078cc" name="Changes" comment="" />
+      <created>1653789490492</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653789490492</updated>
+      <workItem from="1653789493482" duration="8000" />
+    </task>
+    <servers />
+  </component>
+</project>
