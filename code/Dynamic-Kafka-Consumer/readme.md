@@ -1,0 +1,21 @@
+# Sử dụng spring boot để tạo động các topic kafka
+# Giới thiệu về commit offset trong kafka consumer
+- Offset là vị trí trong 1 partition cho thông điệp tiếp theo được gửi đến một consumer. Kafka sử dụng 2 loại offset
+- Có 2 loại offset
+  - Current offset
+  - Committed offset
+## 1. Current offsetf
+- Khi sử dụng phương thức poll, Kafka gửi một vài thông điệp đến chúng ta. Giả sử có 100 bản ghi trong partition. Vị trí khởi đầu của current offset là 0. Chúng ta gọi lần đầu tiên và nhận về 20 thông điệp. Lúc này Kafka sẽ di chuyển current offset đến 20. Khi chúng ta gửi yêu cầu tiếp theo, nó sẽ gửi thêm các thông điệp bắt đầu từ 20 và lại tiếp tục di chuyển current offset. Offset đơn giản là một số nguyên được sử dụng bới Kafka để duy trì vị trí hiện tại của consumer. Đúng vây, current offset là một con trỏ đến bản ghi cuối cùng mà Kafka vừa mới gửi tới consumer trong poll gần đây nhất. Vì vậy, consumer không lấy cùng một bản ghi 2 lần nhờ có current offset
+## 2. Commited offset
+- Quá trình tái cân bằng phân vùng là gì?
+  - Trong một consumer group các consumer sẽ chia sẻ quyền sở hữu các partition trong một topic mà chúng subcribe tới. Khi chúng ta thêm một consumer mới tới một group, nó bắt đầu xử lý các message từ các partitions trước đó mà đang được xử lý bởi consumer khác. Điều tương tự cũng xảy ra khi một consumer bị shutdown hay crash. Nó rời khỏi group, và các partitions nó đang xử lý sẽ được xử lý bởi một trong những consumer còn lại trong consumer group. Quá trình sắp xếp lại các partition (Reasssignment) tới các consumers cũng xảy ra khi các topics mà consumer group đang tiêu thụ được chỉnh sửa (nếu người quản trị thêm các partition mới vào topic).
+  - Quá trình di chuyển liên kết các partitions từ consumer này tới consumer khác được gọi là quá trình tái cân bằng phân vùng (rebalance). Rebalance rất quan trọng vì chúng cung cấp cho consumer group khả năng sẵn sàng và tính mở rộng cao (cho phép chúng ta thêm và xóa consumer dễ dàng và an toàn).
+  - Một điều cần chú ý đó là trong quá trình sử dụng bình thường, quá trình rebalance không nên xảy ra. Trong quá trình rebalance, consumer không thể tiêu thụ các message được, do đó, việc rebalance về cơ bản sẽ làm cho toàn bộ consumer trong consumer group không thể tiêu thụ message được. Ngoài ra, khi các partitions được di chuyển từ consumer này tới consumer khác, consumer sẽ mất đi trạng thái hiện tại của nó. Nếu như nó đã cache dữ liệu sẵn rồi, nó sẽ cần phải làm mới lại cache – dẫn đến làm chậm ứng dụng cho đến khi consumer thiết lập lại trạng thái của nó.
+  - Một consumer được coi là còn sống (alive) nếu nó gửi heartbeat đều đặn tới Kafka Broker (điều phối viên) và đang xử lý messae từ các partitions. Nếu như consumer ngừng gửi heartbeats trong một khoảng thời gian được quy định, khi đó phiên làm việc của nó sẽ hết hạn và sẽ bị coi như đã chết, quá trình rebalance sẽ được kích hoạt. Nếu một consumer gặp sự cố và ngừng xử lý các message, sẽ mất vài giây để Brocker quyết định rằng nó đã chết hay chưa và kích hoạt quá trình rebalance. Trong những giây này, không có message nào được xử lý từ các partitions thuộc sở hữu bởi consumer đã chết.
+- Bây giờ, hãy đến với committed offset, offset này là vị trí mà consumer đã xác nhận về quá trình xử lý. Điều đó nghĩa là gì? Sau khi nhận một danh sách các thông điệp, chúng ta muốn xử lý chúng. Đúng không? Quá trình xử lý này có thể chỉ là lưu trữ chúng vào HDFS. Khi chúng ta chắc chắn rằng chúng ta đã xử lý thành công bản ghi, chúng ta muốn commit offset. Vì vậy, committed offset là một con trỏ tới bản ghi cuối cùng mà một consumer đã xử lý thành công. Ví dụ, consumer đã nhận được 20 bản ghi. Nó xử lý chúng từng cái một, và sau khi xử lý mỗi bản ghi, Nó commit offset.
+- Vì vây, một cách tổng quát:
+  - Current offset -> Gửi các bản ghi -> Được sử dụng để tránh việc gửi lại cùng một bản ghi tới cùng một consumer
+  - Committed offset -> Xử lý bản ghi -> Nó được sử dụng để tránh gửi lại cùng một bản ghi tới một consumer mới trong trường hợp cân bằng lại partition 
+## 3. Cách để commit 1 offset
+## 4. Tự động commit 
+## 5. Commit thủ công
