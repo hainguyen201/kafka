@@ -55,7 +55,7 @@ public class KafkaConsumerRegistryController {
 
     @PostMapping(path = "/activate")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void activateConsumer(@RequestParam String consumerId) {
+    public void activateConsumer(@RequestParam(name= "consumerID") String consumerId) {
         MessageListenerContainer listenerContainer = kafkaListenerEndpointRegistry.getListenerContainer(consumerId);
         if (Objects.isNull(listenerContainer)) {
             throw new RuntimeException(String.format("Consumer with id %s is not found", consumerId));
@@ -69,7 +69,7 @@ public class KafkaConsumerRegistryController {
 
     @PostMapping(path = "/pause")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void pauseConsumer(@RequestParam String consumerId) {
+    public void pauseConsumer(@RequestParam(name = "consumerId") String consumerId) {
         MessageListenerContainer listenerContainer = kafkaListenerEndpointRegistry.getListenerContainer(consumerId);
         if (Objects.isNull(listenerContainer)) {
             throw new RuntimeException(String.format("Consumer with id %s is not found", consumerId));
@@ -87,7 +87,7 @@ public class KafkaConsumerRegistryController {
 
     @PostMapping(path = "/resume")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void resumeConsumer(@RequestParam String consumerId) {
+    public void resumeConsumer(@RequestParam(name="consumerId") String consumerId) {
         MessageListenerContainer listenerContainer = kafkaListenerEndpointRegistry.getListenerContainer(consumerId);
         if (Objects.isNull(listenerContainer)) {
             throw new RuntimeException(String.format("Consumer with id %s is not found", consumerId));
@@ -103,7 +103,7 @@ public class KafkaConsumerRegistryController {
 
     @PostMapping(path = "/deactivate")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deactivateConsumer(@RequestParam String consumerId) {
+    public void deactivateConsumer(@RequestParam(name="consumerId") String consumerId) {
         MessageListenerContainer listenerContainer = kafkaListenerEndpointRegistry.getListenerContainer(consumerId);
         if (Objects.isNull(listenerContainer)) {
             throw new RuntimeException(String.format("Consumer with id %s is not found", consumerId));
